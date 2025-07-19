@@ -1,51 +1,153 @@
 # Text-to-Voice using BARK AI
 
-The `bard_ai.ipynb` notebook in this repository demonstrates how to utilize the BARK AI library to convert text to speech using semantic tokens. BARK AI is a powerful tool that offers advanced natural language processing capabilities for generating high-quality speech.
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 
-## Prerequisites
+This repository demonstrates how to utilize the BARK AI library to convert text to speech using semantic tokens and generate audio visualizations. BARK AI is a powerful transformer-based text-to-audio model that can generate highly realistic, multilingual speech as well as other audio like music, background noise, and simple sound effects.
 
-Before running the notebook, make sure you have the following dependencies installed:
+## Features
 
-- Python
-- IPython
-- NumPy
-- NLTK (Natural Language Toolkit)
-- BARK AI library
+- 🎙️ **Text-to-Speech**: Convert text to natural-sounding speech with multiple voice options
+- 👥 **Multi-Speaker Conversations**: Generate conversations between different speakers
+- 📊 **Audio Visualization**: Create video visualizations with spectrograms and waveforms
+- 🌍 **Multilingual Support**: Support for multiple languages and accents
+- 🎵 **Audio Effects**: Support for emotional expressions, sound effects, and music
 
-You can install the required dependencies by running the following command:
+## Project Structure
 
-```bash
-pip install ipython numpy nltk bark
+```
+text-to-voice/
+├── bark_ai.ipynb           # Main text-to-speech generation notebook
+├── Gen_video.ipynb         # Audio visualization and video generation
+├── install_dep_bark_ai.sh  # Installation script for dependencies
+├── requirements.txt        # Python dependencies
+├── README.md              # This file
+├── LICENSE                # MIT License
+└── .gitignore            # Git ignore rules
 ```
 
-# How to Use
+## Installation
 
-1. Clone the repository to your local machine using the following command:
+### Quick Setup
 
+1. **Clone the repository**:
 ```bash
 git clone https://github.com/shajeen/text-to-voice.git
+cd text-to-voice
 ```
-2. Open the bard_ai.ipynb notebook using Jupyter Notebook or Jupyter Lab.
-3. Execute the notebook cells to generate speech from the provided text.
 
-# Notebook Contents
-The notebook demonstrates the process of converting text to speech using BARK AI's semantic tokens. Here's an overview of what each cell in the notebook does:
+2. **Run the installation script**:
+```bash
+chmod +x install_dep_bark_ai.sh
+./install_dep_bark_ai.sh
+```
 
-1. Setting up the environment to run on a specific GPU.
-2. Importing the necessary libraries and modules.
-3. Preloading BARK AI models for text generation.
-4. Downloading the NLTK tokenizer.
-5. Tokenizing the input script into sentences.
-6. Configuring generation parameters (e.g., speaker, generation temperature, and end-of-sentence probability).
-7. Generating audio using BARK AI based on semantic tokens and the selected speaker.
-8. Combining the generated audio pieces and silence to create the final audio output.
+### Manual Installation
 
-Please note that BARK AI is a powerful language model, and you may require access to specific APIs or configurations to use it effectively.
+1. **Install Python dependencies**:
+```bash
+pip install -r requirements.txt
+```
 
-# Acknowledgments
-The bard_ai.ipynb notebook is based on the BARK AI library and builds upon the efforts of the BARK AI open-source community. We extend our gratitude to them for their valuable contributions.
+2. **For CUDA support** (recommended for faster generation):
+```bash
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+```
 
-# License
-This notebook and the BARK AI library it uses are released under the MIT License.
+## Usage
 
-We hope this notebook helps you explore the capabilities of BARK AI and its potential for text-to-voice conversion. If you encounter any issues or have questions, please feel free to open an issue in the repository. Happy text-to-voice generation using BARK AI!
+### Basic Text-to-Speech
+
+1. Open `bark_ai.ipynb` in Jupyter Notebook or JupyterLab
+2. Run the cells to:
+   - Set up the environment
+   - Load BARK AI models
+   - Generate speech from text
+   - Create multi-speaker conversations
+
+### Audio Visualization
+
+1. After generating audio with `bark_ai.ipynb`
+2. Open `Gen_video.ipynb` to create video visualizations with:
+   - Spectrograms
+   - Waveforms
+   - Combined audio-visual output
+
+### Supported Voice Options
+
+- `v2/en_speaker_0` to `v2/en_speaker_9` - English speakers
+- `v2/hi_speaker_0` to `v2/hi_speaker_9` - Hindi speakers
+- And many more language options
+
+### Special Tokens
+
+BARK AI supports special tokens for enhanced audio generation:
+
+- `[laughter]`, `[laughs]` - Laughter sounds
+- `[sighs]`, `[gasps]` - Emotional expressions
+- `[music]` - Background music
+- `[clears throat]` - Sound effects
+- `—` or `...` - Hesitations and pauses
+- `♪` - Song lyrics
+- `CAPITALIZATION` - Emphasis
+- `[MAN]`, `[WOMAN]` - Gender bias
+
+## Requirements
+
+- **Python**: 3.8 or higher
+- **GPU**: CUDA-compatible GPU recommended (optional but faster)
+- **RAM**: At least 8GB (16GB+ recommended)
+- **Storage**: ~10GB for models and dependencies
+
+## Examples
+
+### Single Speaker
+```python
+script = "Hello! Welcome to my channel. Today we'll explore AI-generated speech."
+audio = generate_audio(script, history_prompt="v2/en_speaker_9")
+```
+
+### Multi-Speaker Conversation
+```python
+speakers = {"Alice": "v2/en_speaker_9", "Bob": "v2/en_speaker_2"}
+conversation = [
+    "Alice: Hello Bob, how are you today?",
+    "Bob: I'm doing great, thanks for asking!"
+]
+```
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## Troubleshooting
+
+### Common Issues
+
+1. **CUDA out of memory**: Reduce batch size or use CPU instead
+2. **Model download issues**: Check internet connection and try again
+3. **Audio quality issues**: Experiment with different temperature settings
+
+### Performance Tips
+
+- Use GPU acceleration when available
+- Adjust `GEN_TEMP` parameter (0.1-1.0) for different audio characteristics
+- Use shorter text segments for better quality
+
+## Acknowledgments
+
+- [BARK AI](https://github.com/suno-ai/bark) - The amazing text-to-audio model
+- Suno AI team for creating and open-sourcing BARK
+- The open-source community for contributions and improvements
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+**Happy text-to-voice generation! 🎤✨**
